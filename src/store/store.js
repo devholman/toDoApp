@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import Todos from '../features/todo/todo.reducer';
+import rootSaga from '../features/todo/todo.saga.js';
 
 const reducers = combineReducers({
   Todos
@@ -17,5 +18,4 @@ const finalCreateStore = compose(
 
 export default finalCreateStore(reducers);
 
-function* rootSaga() {}
 sagaMiddleware.run(rootSaga);

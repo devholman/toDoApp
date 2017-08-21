@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import _ from 'lodash';
 import AppBar from 'material-ui/AppBar';
-import { addTodo, completedTodo } from './todo.reducer';
+import { addTodo, loadTodos, completedTodo } from './todo.reducer';
 import TodoItem from './TodoItem.jsx';
 import AddTodo from './AddTodo.jsx';
 import { connect } from 'react-redux';
@@ -16,6 +18,7 @@ const style = {
 const mapStateToProps = state => ({ todos : state.Todos });
 const mapDispatchToProps = dispatch => ({
   addTodo: todo => dispatch(addTodo(todo)),
+  loadTodo: () => dispatch(loadTodos()),
   completedTodo:  (id) => dispatch(completedTodo(id))
 })
 
@@ -23,6 +26,10 @@ const mapDispatchToProps = dispatch => ({
 class Todo extends Component {
   state = {
     inputValue : ''
+  }
+  componentWillMount() {
+    console.log(this.props);
+    this.props.loadTodo();
   }
   onChange = e => {
     this.setState({ inputValue : e.target.value });
